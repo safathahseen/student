@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course List</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f8f5ff;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            background-color: #e9ddff;
+            border-bottom: 1px solid #d8c8f5;
+        }
+
+        .head h2 {
+            color: #6b46c1;
+            font-size: 28px;
+        }
+
+        .head span {
+            color: #555;
+            font-size: 16px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, .08);
+        }
+
+        h1 {
+            text-align: center;
+            color: #6b46c1;
+            margin-bottom: 25px;
+        }
+
+        .add-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #8b5cf6;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            transition: .3s;
+        }
+
+        .add-btn:hover {
+            background: #7c3aed;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: #8b5cf6;
+            color: white;
+            padding: 15px;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        tr:hover {
+            background: #faf7ff;
+        }
+
+        .edit-btn {
+            color: #8b5cf6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .delete-btn {
+            color: #dc2626;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .edit-btn:hover,
+        .delete-btn:hover {
+            text-decoration: underline;
+        }
+
+        @media(max-width:768px) {
+
+            .head {
+                padding: 15px 20px;
+            }
+
+            .container {
+                width: 95%;
+                overflow-x: auto;
+            }
+
+            table {
+                min-width: 800px;
+            }
+        }
+
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #8b5cf6;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: .3s;
+        }
+
+        .back-btn:hover {
+            background: #7c3aed;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="head">
+        <h2>SCMS</h2>
+        <span>Courses</span>
+    </div>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>Course List</h1>
+
+            <a href="{% url 'add_course' %}" class="add-btn">
+                Add Course
+            </a>
+
+            <table>
+
+                <tr>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Description</th>
+                    <th>Faculty</th>
+                    <th>Actions</th>
+                    <th>Enroll</th>
+                </tr>
+
+                {% for course in courses %}
+
+                <tr>
+
+                    <td>{{ course.course_name }}</td>
+
+                    <td>{{ course.course_code }}</td>
+
+                    <td>{{ course.description }}</td>
+
+                    <td>{{ course.faculty }}</td>
+
+                    <td>
+
+                        <a href="{% url 'edit_course' course.id %}" class="edit-btn">
+                            Edit
+                        </a>
+
+                        |
+
+                        <a href="{% url 'delete_course' course.id %}" class="delete-btn">
+                            Delete
+                        </a>
+
+                    </td>
+                    <td>
+                        {% if not request.user.is_superuser %}
+                        <a href="{% url 'enroll_course' course.id %}">
+                            Enroll
+                        </a>
+                        {% endif %}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+            {% if request.user.is_superuser %}
+            <a href="{% url 'admin_dashboard' %}" class="back-btn">
+                Back to Dashboard
+            </a>
+
+            {% elif request.user.userprofile.role == 'Faculty' %}
+            <a href="{% url 'faculty_dashboard' %}" class="back-btn">
+                Back to Dashboard
+            </a>
+
+            {% else %}
+            <a href="{% url 'student_dashboard' %}" class="back-btn">
+                Back to Dashboard
+            </a>
+            {% endif %}
+        </div>
+
+    </div>
+
+</body>
+
+</html>

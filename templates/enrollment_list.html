@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrollments</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f8f5ff;
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+        }
+
+        .head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            background-color: #e9ddff;
+            border-bottom: 1px solid #d8c8f5;
+        }
+
+        .head h2 {
+            color: #6b46c1;
+            font-size: 28px;
+        }
+
+        .head span {
+            color: #555;
+            font-size: 16px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, .08);
+        }
+
+        h1 {
+            text-align: center;
+            color: #6b46c1;
+            margin-bottom: 25px;
+        }
+
+        .add-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #8b5cf6;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            transition: .3s;
+        }
+
+        .add-btn:hover {
+            background: #7c3aed;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: #8b5cf6;
+            color: white;
+            padding: 15px;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        tr:hover {
+            background: #faf7ff;
+        }
+
+        .delete-btn {
+            text-decoration: none;
+            color: #dc2626;
+            font-weight: 600;
+        }
+
+        .delete-btn:hover {
+            text-decoration: underline;
+        }
+
+        @media(max-width:768px) {
+
+            .head {
+                padding: 15px 20px;
+            }
+
+            .container {
+                width: 95%;
+                overflow-x: auto;
+            }
+
+            table {
+                min-width: 700px;
+            }
+        }
+
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #8b5cf6;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: .3s;
+        }
+
+        .back-btn:hover {
+            background: #7c3aed;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="head">
+        <h2>SCMS</h2>
+        <span>Enrollments</span>
+    </div>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>Enrollments</h1>
+
+            <a href="{% url 'add_enrollment' %}" class="add-btn">
+                Add Enrollment
+            </a>
+
+            <table>
+
+                <tr>
+                    <th>Student</th>
+                    <th>Course</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+
+                {% for enrollment in enrollments %}
+
+                <tr>
+
+                    <td>{{ enrollment.student.username }}</td>
+
+                    <td>{{ enrollment.course.course_name }}</td>
+
+                    <td>{{ enrollment.enrolled_on }}</td>
+
+                    <td>
+                        <a href="{% url 'delete_enrollment' enrollment.id %}" class="delete-btn">
+                            Delete
+                        </a>
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+            {% if request.user.is_superuser %}
+            <a href="{% url 'admin_dashboard' %}" class="back-btn">
+                Back to Dashboard
+            </a>
+
+            {% elif request.user.userprofile.role == 'Faculty' %}
+            <a href="{% url 'faculty_dashboard' %}" class="back-btn">
+                Back to Dashboard
+            </a>
+
+            {% else %}
+            <a href="{% url 'student_dashboard' %}" class="back-btn">
+                Back to Dashboard
+            </a>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

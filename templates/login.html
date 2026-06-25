@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f8f5ff;
+        min-height: 100vh;
+        color: #333;
+    }
+
+    /* Header */
+    .head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 60px;
+        background-color: #e9ddff;
+        border-bottom: 1px solid #d8c8f5;
+    }
+
+    .head h2 {
+        color: #6b46c1;
+        font-size: 28px;
+        font-weight: 600;
+    }
+
+    .head span {
+        color: #555;
+        font-size: 16px;
+    }
+
+    /* Login Container */
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 85vh;
+    }
+
+    /* Login Card */
+    .login-card {
+        background: white;
+        padding: 40px;
+        width: 400px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .login-card h2 {
+        text-align: center;
+        color: #6b46c1;
+        margin-bottom: 25px;
+    }
+
+    /* Form Elements */
+    .login-card label {
+        font-size: 15px;
+        font-weight: 500;
+        color: #444;
+    }
+
+    .login-card input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 8px;
+        margin-bottom: 18px;
+        border: 1px solid #d8c8f5;
+        border-radius: 6px;
+        font-size: 15px;
+        outline: none;
+    }
+
+    .login-card input:focus {
+        border-color: #8b5cf6;
+        box-shadow: 0 0 5px rgba(139, 92, 246, 0.2);
+    }
+
+    /* Button */
+    .login-card button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        background-color: #8b5cf6;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .login-card button:hover {
+        background-color: #7c3aed;
+    }
+
+    /* Register Link */
+    .register-text {
+        text-align: center;
+        margin-top: 20px;
+        color: #666;
+    }
+
+    .register-text a {
+        color: #8b5cf6;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .register-text a:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media(max-width:480px) {
+        .head {
+            padding: 15px 20px;
+        }
+
+        .login-card {
+            width: 90%;
+            padding: 30px 20px;
+        }
+    }
+    .error-message{
+    background:#ffe5e5;
+    color:#d8000c;
+    padding:10px;
+    border-radius:6px;
+    margin-bottom:15px;
+    text-align:center;
+}
+</style>
+
+<body>
+
+    <div class="head">
+        <h2>SCMS</h2>
+        <span>Login</span>
+    </div>
+    <div class="login-container">
+        <div class="login-card">
+            <h2>Login</h2>
+            {% if messages %}
+
+            {% for message in messages %}
+
+            <p class="error-message">
+                {{ message }}
+            </p>
+
+            {% endfor %}
+
+            {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+                <label>Username:</label><br>
+                <input type="text" name="username" placeholder="Enter username" required><br><br>
+                <label>Password:</label><br>
+                <input type="password" name="password" placeholder="Enter your password" required><br><br>
+                <button type="submit">Login</button>
+            </form>
+            <div class="register-text">
+                <p>Don't have an account?</p>
+                <a href="{% url 'register' %}">Register</a>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

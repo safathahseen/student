@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Form</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f8f5ff;
+            min-height: 100vh;
+        }
+
+        .head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            background-color: #e9ddff;
+            border-bottom: 1px solid #d8c8f5;
+        }
+
+        .head h2 {
+            color: #6b46c1;
+            font-size: 28px;
+        }
+
+        .head span {
+            color: #555;
+            font-size: 16px;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .form-card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            text-align: center;
+            color: #6b46c1;
+            margin-bottom: 30px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d8c8f5;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 5px rgba(139, 92, 246, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background: #8b5cf6;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        button:hover {
+            background: #7c3aed;
+        }
+
+        @media(max-width:600px) {
+
+            .head {
+                padding: 15px 20px;
+            }
+
+            .form-card {
+                padding: 25px;
+            }
+        }
+
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #8b5cf6;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: .3s;
+        }
+
+        .back-btn:hover {
+            background: #7c3aed;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="head">
+        <h2>SCMS</h2>
+        <span>Attendance</span>
+    </div>
+
+    <div class="form-container">
+
+        <div class="form-card">
+
+            <h1>Add Attendance</h1>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <button type="submit">
+                    Save
+                </button>
+
+            </form>
+            {% if request.user.is_superuser %}
+            <a href="{% url 'admin_dashboard' %}" class="back-btn">
+                Back to Dashboard
+            </a>
+
+            {% elif request.user.userprofile.role == 'Faculty' %}
+            <a href="{% url 'faculty_dashboard' %}" class="back-btn">
+                Back to Dashboard
+            </a>
+
+            {% else %}
+            <a href="{% url 'student_dashboard' %}" class="back-btn">
+                Back to Dashboard
+            </a>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f8f5ff;
+        color: #333;
+        min-height: 100vh;
+    }
+
+    /* Header */
+    .head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 60px;
+        background-color: #e9ddff;
+        border-bottom: 1px solid #d8c8f5;
+    }
+
+    .head h2 {
+        color: #6b46c1;
+        font-size: 28px;
+        font-weight: 600;
+    }
+
+    .head span {
+        color: #555;
+        font-size: 16px;
+        text-transform: capitalize;
+    }
+
+    /* Main Section */
+    .heads {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-height: 80vh;
+        padding: 20px;
+    }
+
+    .heads h1 {
+        font-size: 48px;
+        color: #5b3fa8;
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .heads p {
+        font-size: 18px;
+        color: #666;
+        margin-top: 8px;
+        line-height: 1.6;
+    }
+
+    /* Buttons */
+    .button-group {
+        margin-top: 35px;
+        display: flex;
+        gap: 15px;
+    }
+
+    .btn {
+        text-decoration: none;
+        padding: 12px 30px;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 500;
+        transition: 0.3s;
+    }
+
+    /* Login Button */
+    .btn:first-child {
+        background-color: #8b5cf6;
+        color: white;
+    }
+
+    .btn:first-child:hover {
+        background-color: #7c3aed;
+    }
+
+    /* Register Button */
+    .btn:last-child {
+        background-color: white;
+        color: #8b5cf6;
+        border: 1px solid #8b5cf6;
+    }
+
+    .btn:last-child:hover {
+        background-color: #f3eeff;
+    }
+
+    /* Responsive */
+    @media(max-width:768px) {
+
+        .head {
+            padding: 15px 20px;
+        }
+
+        .heads h1 {
+            font-size: 34px;
+        }
+
+        .heads p {
+            font-size: 16px;
+        }
+
+        form {
+            flex-direction: column;
+            width: 200px;
+        }
+
+        .btn {
+            text-align: center;
+        }
+
+        .button-group {
+            flex-direction: column;
+            width: 200px;
+        }
+    }
+</style>
+
+<body>
+    <div class="head">
+        <h2>SCMS</h2>
+        <span>home</span>
+    </div>
+    <div class="heads">
+        <h1>Student Course</h1>
+        <h1>Management System</h1>
+        <p>Manage Courses, Enrollment, Attendance and Grades</p>
+        <p>in a simpler and efficient way</p>
+
+
+        <div class="button-group">
+            <a href="{% url 'login' %}" class="btn">Login</a>
+            <a href="{% url 'register' %}" class="btn">Register</a>
+        </div>
+
+
+
+
+    </div>
+</body>
+
+</html>

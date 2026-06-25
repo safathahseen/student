@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Enrolled Courses</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f8f5ff;
+            min-height: 100vh;
+        }
+
+        .head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            background-color: #e9ddff;
+            border-bottom: 1px solid #d8c8f5;
+        }
+
+        .head h2 {
+            color: #6b46c1;
+            font-size: 28px;
+        }
+
+        .head span {
+            color: #555;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.08);
+        }
+
+        h1 {
+            text-align: center;
+            color: #6b46c1;
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        th {
+            background: #8b5cf6;
+            color: white;
+            padding: 15px;
+        }
+
+        td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: #faf7ff;
+        }
+
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #8b5cf6;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            margin-top: 25px;
+            font-weight: 600;
+            transition: .3s;
+        }
+
+        .back-btn:hover {
+            background: #7c3aed;
+        }
+
+        @media(max-width:768px) {
+
+            .head {
+                padding: 15px 20px;
+            }
+
+            .card {
+                padding: 20px;
+                overflow-x: auto;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="head">
+        <h2>SCMS</h2>
+        <span>My Enrollments</span>
+    </div>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>My Enrolled Courses</h1>
+
+            <table>
+
+                <tr>
+                    <th>Course Name</th>
+                    <th>Course Code</th>
+                    <th>Enrollment Date</th>
+                </tr>
+
+                {% for enrollment in enrollments %}
+
+                <tr>
+                    <td>{{ enrollment.course.course_name }}</td>
+                    <td>{{ enrollment.course.course_code }}</td>
+                    <td>{{ enrollment.enrolled_on }}</td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+            <a href="{% url 'student_dashboard' %}" class="back-btn">
+                Back to Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

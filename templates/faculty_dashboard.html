@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f8f5ff;
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+        }
+
+        .head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            background-color: #e9ddff;
+            border-bottom: 1px solid #d8c8f5;
+        }
+
+        .head h2 {
+            color: #6b46c1;
+            font-size: 28px;
+        }
+
+        .head span {
+            color: #555;
+            font-size: 16px;
+        }
+
+        .dashboard {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #6b46c1;
+            margin-bottom: 30px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, .08);
+            transition: .3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: #6b46c1;
+            margin-bottom: 15px;
+        }
+
+        .card a {
+            text-decoration: none;
+            color: #8b5cf6;
+            font-weight: 600;
+        }
+
+        .logout {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            text-align: center;
+            background: #8b5cf6;
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 6px;
+            transition: .3s;
+        }
+
+        .logout:hover {
+            background: #7c3aed;
+        }
+
+        @media(max-width:768px) {
+            .head {
+                padding: 15px 20px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="head">
+        <h2>SCMS</h2>
+        <span>Faculty Dashboard</span>
+    </div>
+
+    <div class="dashboard">
+
+        <h1>Faculty Dashboard</h1>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Courses</h3>
+                <a href="{% url 'course_list' %}">
+                    View Courses
+                </a>
+            </div>
+
+            <div class="card">
+                <h3>Attendance</h3>
+                <a href="{% url 'attendance_list' %}">
+                    Manage Attendance
+                </a>
+            </div>
+
+            <div class="card">
+                <h3>Grades</h3>
+                <a href="{% url 'grade_list' %}">
+                    Manage Grades
+                </a>
+            </div>
+
+            <div class="card">
+                <h3>Enrollments</h3>
+                <a href="{% url 'enrollment_list' %}">
+                    View Enrollments
+                </a>
+            </div>
+
+        </div>
+
+        <a href="{% url 'logout' %}" class="logout">
+            Logout
+        </a>
+
+    </div>
+
+</body>
+
+</html>

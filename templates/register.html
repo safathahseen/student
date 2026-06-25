@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f8f5ff;
+        min-height: 100vh;
+        color: #333;
+    }
+
+    /* Header */
+    .head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 60px;
+        background-color: #e9ddff;
+        border-bottom: 1px solid #d8c8f5;
+    }
+
+    .head h2 {
+        color: #6b46c1;
+        font-size: 28px;
+        font-weight: 600;
+    }
+
+    .head span {
+        color: #555;
+        font-size: 16px;
+    }
+
+    /* Register Container */
+    .register-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 85vh;
+        padding: 20px;
+    }
+
+    /* Register Card */
+    .register-card {
+        background: white;
+        width: 450px;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .register-card h2 {
+        text-align: center;
+        color: #6b46c1;
+        margin-bottom: 25px;
+    }
+
+    /* Form */
+    .register-card label {
+        display: block;
+        margin-bottom: 6px;
+        color: #444;
+        font-weight: 500;
+    }
+
+    .register-card input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #d8c8f5;
+        border-radius: 6px;
+        margin-bottom: 18px;
+        font-size: 15px;
+        outline: none;
+        transition: 0.3s;
+    }
+
+    .register-card p {
+        margin-bottom: 15px;
+    }
+
+    .register-card label {
+        display: block;
+        margin-bottom: 6px;
+        color: #444;
+        font-weight: 500;
+    }
+
+    .register-card input,
+    .register-card select,
+    .register-card textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #d8c8f5;
+        border-radius: 6px;
+        font-size: 15px;
+        outline: none;
+        margin-top: 5px;
+    }
+
+    .register-card input:focus,
+    .register-card select:focus,
+    .register-card textarea:focus {
+        border-color: #8b5cf6;
+        box-shadow: 0 0 5px rgba(139, 92, 246, 0.2);
+    }
+
+    .register-card input:focus {
+        border-color: #8b5cf6;
+        box-shadow: 0 0 5px rgba(139, 92, 246, 0.2);
+    }
+
+    /* Register Button */
+    .register-card button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        background: #8b5cf6;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .register-card button:hover {
+        background: #7c3aed;
+    }
+
+    /* Login Link */
+    .login-text {
+        text-align: center;
+        margin-top: 20px;
+        color: #666;
+    }
+
+    .login-text a {
+        color: #8b5cf6;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .login-text a:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media(max-width:500px) {
+
+        .head {
+            padding: 15px 20px;
+        }
+
+        .register-card {
+            width: 100%;
+            padding: 30px 20px;
+        }
+    }
+</style>
+
+<body>
+    <div class="head">
+        <h2>SCMS</h2>
+        <span>Register</span>
+
+    </div>
+    <div class="register-container">
+        <div class="register-card">
+            <h2>Register</h2>
+            {% if messages %}
+
+            {% for message in messages %}
+
+            <p style="color:red;">
+                {{ message }}
+            </p>
+
+            {% endfor %}
+
+            {% endif %}
+            <form method="POST">
+
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <button type="submit">
+                    Register
+                </button>
+
+            </form>
+            <div class="login-text">
+                <p>Already have an account?</p>
+                <a href="{% url 'login' %}">Login</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

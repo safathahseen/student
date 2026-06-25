@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Form</title>
+
+    ```
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8f5ff;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Header */
+        .head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            background-color: #e9ddff;
+            border-bottom: 1px solid #d8c8f5;
+        }
+
+        .head h2 {
+            color: #6b46c1;
+            font-size: 28px;
+        }
+
+        .head span {
+            color: #555;
+            font-size: 16px;
+        }
+
+        /* Form Container */
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 85vh;
+        }
+
+        .form-card {
+            background: white;
+            width: 450px;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-card h1 {
+            text-align: center;
+            color: #6b46c1;
+            margin-bottom: 25px;
+        }
+
+        /* Django Form Styling */
+        .form-card p {
+            margin-bottom: 15px;
+        }
+
+        .form-card label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .form-card input,
+        .form-card select,
+        .form-card textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d8c8f5;
+            border-radius: 6px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .form-card input:focus,
+        .form-card select:focus,
+        .form-card textarea:focus {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 5px rgba(139, 92, 246, 0.2);
+        }
+
+        /* Save Button */
+        .save-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #8b5cf6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .save-btn:hover {
+            background-color: #7c3aed;
+        }
+
+        @media(max-width:480px) {
+
+            .head {
+                padding: 15px 20px;
+            }
+
+            .form-card {
+                width: 90%;
+                padding: 25px;
+            }
+        }
+
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #8b5cf6;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: .3s;
+        }
+
+        .back-btn:hover {
+            background: #7c3aed;
+        }
+    </style>
+    ```
+
+</head>
+
+<body>
+
+    ```
+    <div class="head">
+        <h2>SCMS</h2>
+        <span>Student Form</span>
+    </div>
+
+    <div class="form-container">
+
+        <div class="form-card">
+
+            <h1>Student Form</h1>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <button type="submit" class="save-btn">
+                    Save
+                </button>
+
+            </form>
+            <a href="{% url 'admin_dashboard' %}" class="back-btn">
+                Back to Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
